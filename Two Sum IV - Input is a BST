@@ -1,0 +1,34 @@
+class Solution {
+    public boolean findTarget(TreeNode root, int k) {  
+      return helper(root,root,k);
+    }
+    
+    public boolean helper(TreeNode root,TreeNode node, int k){
+        if(node==null){
+            return false;
+        }
+        
+        int comp = k-node.val;
+        if(comp<node.val){
+           if(find(root,comp))return true;
+        }
+        
+        return helper(root,node.left,k)|| helper(root,node.right,k);
+    }
+    
+    public boolean find(TreeNode node, int data){
+        if(node==null){
+            return false;
+        }
+        if(node.val>data){
+          return find(node.left,data);
+        }
+        else if(node.val<data){
+            return find(node.right,data);
+        }
+        else{
+            return true;
+        }
+        
+    }
+}
